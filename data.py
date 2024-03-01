@@ -27,6 +27,7 @@ class AudioData(Dataset):
     def __init__(self, window_size, stride, i, t):
         self.window_size = window_size
         self.stride = stride
+        self.rg = torch.arange(window_size)
         self.mask = nn.Transformer.generate_square_subsequent_mask(window_size)
         _, i = wavfile.read(i)
         _, t = wavfile.read(t)
@@ -50,7 +51,7 @@ class AudioData(Dataset):
     def __getitem__(self, idx):
         st = idx * self.stride
         ed = st + self.window_size
-        return self.i[st:ed], self.t[st:ed], self.t[st + 1 : ed + 1], self.mask
+        return self.i[st:ed], self.t[st:ed], self.t[st + 1 : ed + 1], self.rg, self.mask
 
 
 class AudioDataModule(L.LightningDataModule):
