@@ -3,11 +3,11 @@ config:
   stride: 128
   vocab_size: 65536
   window_size: 1024
-  d_model: 256
+  d_model: 128
   nhead: 16
   num_encoder_layers: 2
   num_decoder_layers: 2
-  dim_feedforward: 512
+  dim_feedforward: 256
   dropout: 0.1
   activation: "gelu"
   norm_first: false
