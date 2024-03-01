@@ -53,10 +53,8 @@ class AudioTransformer(L.LightningModule):
         mask_shape = mask.shape
         if len(mask_shape) == 3:
             mask = mask[0]
-        print('iiinfo', ipt.shape, tgt.shape, rg.shape, mask.shape)
         ipt = self.encoder_embedding_bit_depth(ipt) + self.encoder_embedding_time(rg)
         tgt = self.decoder_embedding_bit_depth(tgt) + self.decoder_embedding_time(rg)
-        print('iiinfo2', ipt.shape, tgt.shape, rg.shape, mask.shape)
         o = self.transformer(ipt, tgt, src_mask=mask, tgt_mask=mask)
         o = self.ln_final(o)
         o = self.dense_final(o)
@@ -65,12 +63,14 @@ class AudioTransformer(L.LightningModule):
     def training_step(self, batch):
         x0, x1, y, rg, m = batch
         x_hat = self(x0, x1, rg, m)
+        print('x_hat', x_hat.shape, x_hat.dtype, y.shape, y.dtype)
         loss = nn.CrossEntropyLoss(x_hat, y)
         return loss
 
     def validation_step(self, batch):
         x0, x1, y, rg, m = batch
         x_hat = self(x0, x1, rg, m)
+        print('x_hat', x_hat.shape, x_hat.dtype, y.shape, y.dtype)
         loss = nn.CrossEntropyLoss(x_hat, y)
         return loss
 
