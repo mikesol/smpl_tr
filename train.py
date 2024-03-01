@@ -13,7 +13,7 @@ config_file_path = local_env.config_path
 
 # Reading the YAML file
 with open(config_file_path, "r") as file:
-    config = yaml.safe_load(file)
+    config = yaml.safe_load(file)['config']
 
 torch.set_float32_matmul_precision("medium")
 
