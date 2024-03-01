@@ -1,6 +1,6 @@
 import torch
 from torch import optim, nn
-import lightning as L
+import pytorch_lightning as L
 
 
 class AudioTransformer(L.LightningModule):

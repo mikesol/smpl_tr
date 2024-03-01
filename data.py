@@ -4,7 +4,7 @@ import os
 import torch
 from torch import nn
 import numpy as np
-import lightning as L
+import pytorch_lightning as L
 
 
 def make_pairings(i):
