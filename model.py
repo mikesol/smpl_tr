@@ -51,6 +51,7 @@ class AudioTransformer(L.LightningModule):
         print('iiinfo', ipt.shape, tgt.shape, rg.shape, mask.shape)
         ipt = self.encoder_embedding_bit_depth(ipt) + self.encoder_embedding_time(rg)
         tgt = self.decoder_embedding_bit_depth(tgt) + self.decoder_embedding_time(rg)
+        print('iiinfo2', ipt.shape, tgt.shape, rg.shape, mask.shape)
         o = self.transformer(ipt, tgt, src_mask=mask, tgt_mask=mask)
         o = self.ln_final(o)
         o = self.dense_final(o)
