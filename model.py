@@ -48,6 +48,7 @@ class AudioTransformer(L.LightningModule):
         self.dense_final = nn.Linear(in_features=d_model, out_features=vocab_size)
 
     def forward(self, ipt, tgt, rg, mask):
+        print('iiinfo', ipt.shape, tgt.shape, rg.shape, mask.shape)
         ipt = self.encoder_embedding_bit_depth(ipt) + self.encoder_embedding_time(rg)
         tgt = self.decoder_embedding_bit_depth(tgt) + self.decoder_embedding_time(rg)
         o = self.transformer(ipt, tgt, src_mask=mask, tgt_mask=mask)
