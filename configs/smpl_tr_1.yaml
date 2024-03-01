@@ -11,5 +11,5 @@ config:
   dropout: 0.1
   activation: "gelu"
   norm_first: false
-  bias: false
+  bias: true
   
