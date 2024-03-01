@@ -80,8 +80,12 @@ class AudioDataModule(L.LightningDataModule):
                 for i, t in files
             ]
         )
+        dl = len(dataset)
+        tl = int(dl * 0.85)
+        vl = int(dl * 0.1)
+        tsl = dl - (tl + vl)
         self.train, self.val, self.test = random_split(
-            dataset, [0.85, 0.1, 0.5], generator=torch.Generator().manual_seed(42)
+            dataset, [tl, vl, tsl], generator=torch.Generator().manual_seed(42)
         )
 
     def train_dataloader(self):
