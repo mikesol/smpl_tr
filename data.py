@@ -90,10 +90,10 @@ class AudioDataModule(L.LightningDataModule):
         )
 
     def train_dataloader(self):
-        return DataLoader(self.train, batch_size=self.hparams.batch_size)
+        return DataLoader(self.train, batch_size=self.hparams.batch_size, num_workers=3)
 
     def val_dataloader(self):
-        return DataLoader(self.val, batch_size=self.hparams.batch_size)
+        return DataLoader(self.val, batch_size=self.hparams.batch_size, num_workers=3)
 
     def test_dataloader(self):
-        return DataLoader(self.test, batch_size=self.hparams.batch_size)
+        return DataLoader(self.test, batch_size=self.hparams.batch_size, num_workers=3)
