@@ -4,7 +4,7 @@ config:
   vocab_size: 65536
   window_size: 1024
   d_model: 128
-  nhead: 16
+  nhead: 8
   num_encoder_layers: 2
   num_decoder_layers: 2
   dim_feedforward: 256
