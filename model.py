@@ -39,6 +39,7 @@ class AudioTransformer(L.LightningModule):
             num_decoder_layers=num_decoder_layers,
             dim_feedforward=dim_feedforward,
             dropout=dropout,
+            batch_first=True,
             activation=activation,
             norm_first=norm_first,
             bias=bias,
