@@ -62,9 +62,7 @@ class AudioTransformer(L.LightningModule):
         x1 = x[:, 1:, :]
         y = y[:, 1:, :]
         x_hat = self(x0, x1)
-        loss = nn.CrossEntropyLoss(
-            x_hat,
-        )
+        loss = nn.CrossEntropyLoss(x_hat, y)
         return loss
 
     def configure_optimizers(self):
@@ -96,6 +94,6 @@ if __name__ == "__main__":
             torch.ones((batch_size, window_size), dtype=torch.int32),
             torch.ones((batch_size, window_size), dtype=torch.int32),
             torch.ones((batch_size, window_size), dtype=torch.int32),
-            nn.Transformer.generate_square_subsequent_mask(window_size)
+            nn.Transformer.generate_square_subsequent_mask(window_size),
         ],
     )
