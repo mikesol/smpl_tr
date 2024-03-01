@@ -65,7 +65,7 @@ class AudioTransformer(L.LightningModule):
         x_hat = self(x0, x1, rg, m)
         # print("x_hat", x_hat.shape, x_hat.dtype, y.shape, y.dtype)
         loss = nn.CrossEntropyLoss()(torch.transpose(x_hat, 1, 2), y.type(torch.long))
-        self.log("train_loss", loss)
+        self.log("train_loss", loss, sync_dist=True)
         return loss
 
     def validation_step(self, batch):
@@ -73,7 +73,7 @@ class AudioTransformer(L.LightningModule):
         x_hat = self(x0, x1, rg, m)
         # print("x_hat", x_hat.shape, x_hat.dtype, y.shape, y.dtype)
         loss = nn.CrossEntropyLoss()(torch.transpose(x_hat, 1, 2), y.type(torch.long))
-        self.log("val_loss", loss)
+        self.log("val_loss", loss, sync_dist=True)
         return loss
 
     def configure_optimizers(self):
