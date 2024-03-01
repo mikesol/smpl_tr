@@ -1,4 +1,3 @@
-import os
 import torch
 from torch import optim, nn
 import lightning as L
@@ -20,6 +19,7 @@ class AudioTransformer(L.LightningModule):
         bias,
     ):
         super().__init__()
+        self.save_hyperparameters()
         self.encoder_embedding_bit_depth = torch.nn.Embedding(
             num_embeddings=vocab_size, embedding_dim=d_model
         )
@@ -55,8 +55,6 @@ class AudioTransformer(L.LightningModule):
         return o
 
     def training_step(self, batch):
-        # training_step defines the train loop.
-        # it is independent of forward
         x, y = batch
         x0 = x[:, :-1, :]
         x1 = x[:, 1:, :]
