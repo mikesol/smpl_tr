@@ -61,7 +61,7 @@ class AudioDataModule(L.LightningDataModule):
     # no stage needed
     def setup(self, stage):
 
-        data_path = self.params.data_dir
+        data_path = self.hparams.data_dir
 
         day1 = [
             os.path.join(data_path, "day1", x)
@@ -76,7 +76,7 @@ class AudioDataModule(L.LightningDataModule):
 
         dataset = ConcatDataset(
             [
-                AudioData(self.params.window_size, self.params.stride, i, t)
+                AudioData(self.hparams.window_size, self.hparams.stride, i, t)
                 for i, t in files
             ]
         )
@@ -85,10 +85,10 @@ class AudioDataModule(L.LightningDataModule):
         )
 
     def train_dataloader(self):
-        return DataLoader(self.train, batch_size=self.params.batch_size)
+        return DataLoader(self.train, batch_size=self.hparams.batch_size)
 
     def val_dataloader(self):
-        return DataLoader(self.val, batch_size=self.params.batch_size)
+        return DataLoader(self.val, batch_size=self.hparams.batch_size)
 
     def test_dataloader(self):
-        return DataLoader(self.test, batch_size=self.params.batch_size)
+        return DataLoader(self.test, batch_size=self.hparams.batch_size)
