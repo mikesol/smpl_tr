@@ -1,0 +1,15 @@
+config:
+  batch_size: 16
+  stride: 128
+  vocab_size: 65536
+  window_size: 1024
+  d_model: 512
+  nhead: 16
+  num_encoder_layers: 4
+  num_decoder_layers: 4
+  dim_feedforward: 1024
+  dropout: 0.1
+  activation: "gelu"
+  norm_first: true
+  bias: false
+  
