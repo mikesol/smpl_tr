@@ -58,7 +58,8 @@ class AudioDataModule(L.LightningDataModule):
         super().__init__()
         self.save_hyperparameters()
 
-    def setup(self):
+    # no stage needed
+    def setup(self, _ ):
 
         data_path = self.params.data_dir
 
