@@ -56,11 +56,11 @@ class AudioTransformer(L.LightningModule):
         return o
 
     def training_step(self, batch):
-        x, y = batch
+        x, y, m = batch
         x0 = x[:, :-1, :]
         x1 = x[:, 1:, :]
         y = y[:, 1:, :]
-        x_hat = self(x0, x1)
+        x_hat = self(x0, x1, m)
         loss = nn.CrossEntropyLoss(x_hat, y)
         return loss
 
